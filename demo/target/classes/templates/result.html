@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+</head>
+<body>
+
+<h2>Customer List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Street</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.first_name}"></td>
+            <td th:text="${customer.last_name}"></td>
+            <td th:text="${customer.street}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.city}"></td>
+            <td th:text="${customer.state}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.phone}"></td>
+            
+            
+            <td>
+    			<form th:action="@{/deleteCustomer}" method="post">
+                <!-- Use data-customer-uuid attribute to store the UUID -->
+                <button type="submit" data-customer-uuid="${customer.uuid}">Delete</button>
+            		</form>
+			</td>
+			<td>
+                <button onclick="updateCustomer('${customer.id}')">Update</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
